@@ -64,7 +64,7 @@ def save_model(model, filename):
 
 
 if __name__ == "__main__" :
-    df = pd.read_csv("Dataset/Crop_recommendation.csv")
+    df = pd.read_csv("../csv datasets/Crop_recommendation.csv")
 
     explore_data(df)
     checking_removing_duplicates(df)
@@ -77,5 +77,4 @@ if __name__ == "__main__" :
 
     classification_metrics(dt_model, X_train, X_test, y_train, y_test)
 
-    save_model(dt_model, "random_forest_crop_model.pkl")
-
+    save_model(dt_model, "../models/random_forest_crop_model.pkl")
