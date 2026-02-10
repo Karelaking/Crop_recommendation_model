@@ -59,7 +59,7 @@ def save_model(model, filename):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv("Dataset/Fertilizer_NPK_clean.csv")
+    df = pd.read_csv("../csv datasets/Fertilizer_NPK_clean.csv")
     target = "Fertilizer Name"
 
     X_train, X_test, y_train, y_test, le, scaler = div_dataset(df, target)
@@ -70,8 +70,4 @@ if __name__ == '__main__':
 
     model_evaluate(nn_model,X_test,y_test)
 
-    save_model(nn_model, "fertilizer_model_neural.pkl")
-
-
-
-
+    save_model(nn_model, "../models/fertilizer_model_neural.pkl")

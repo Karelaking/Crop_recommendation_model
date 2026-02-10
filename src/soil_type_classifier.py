@@ -31,15 +31,15 @@ train_transform = transforms.Compose([
     )
 ])
 
-trainset = torchvision.datasets.ImageFolder(root='Dataset/Train', transform= train_transform )
+trainset = torchvision.datasets.ImageFolder(root='D:\VS CODE\pycharm\projs\CropClassifier\Dataset\Train', transform= train_transform )
 dataloader['Train'] = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                           shuffle=True, num_workers=2)
 
-testset = torchvision.datasets.ImageFolder(root='Dataset/Test', transform=transform)
+testset = torchvision.datasets.ImageFolder(root='D:\VS CODE\pycharm\projs\CropClassifier\Dataset\Test', transform=transform)
 dataloader['Test'] = torch.utils.data.DataLoader(testset, batch_size=batch_size,
                                          shuffle=False, num_workers=2)
 
-validateset  = torchvision.datasets.ImageFolder(root='Dataset/Validate', transform=transform)
+validateset  = torchvision.datasets.ImageFolder(root='D:\VS CODE\pycharm\projs\CropClassifier\Dataset\Validate', transform=transform)
 dataloader['Validate'] = torch.utils.data.DataLoader(validateset, batch_size=batch_size,
                                          shuffle=False, num_workers=2)
 
@@ -159,8 +159,7 @@ if __name__ == "__main__":
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer_ft, step_size=7, gamma=0.1)
 
     model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                           num_epoch=2)
+                           num_epoch=10)
     test_model(model_ft, criterion)
-    torch.save(model_ft.state_dict(), "soil_classifier_model.pt")
+    torch.save(model_ft.state_dict(), "D:\VS CODE\pycharm\projs\CropClassifier\models/soil_classifier_model.pt")
     print("Model saved as soil_classifier_model.pt")
-

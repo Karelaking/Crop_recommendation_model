@@ -2,7 +2,6 @@ from pandas import read_csv
 import pickle
 import numpy as np
 
-
 def detect_deficiency(deficiency):
     column = ["N", "P", "K", "OC", "B", "Cu", "Fe", "Mn", "S", "Zn"]
     for i in range(len(column)):
@@ -15,7 +14,6 @@ def fertilizer_recommendation(deficiency):
         return generalized_fertilizers(deficiency), generalized_micronutrients(deficiency)
     else:
         return ml_fertilizer(sample), generalized_micronutrients(deficiency)
-
 
 def ml_fertilizer(sample):
     with open("models/fertilizer_model.pkl", "rb") as f:
@@ -106,11 +104,9 @@ def generalized_micronutrients(deficiency):
         print(micronutrients)
 
 if __name__ == "__main__":
-    df = read_csv("Dataset/state_soil_summary.csv")
+    df = read_csv("../csv datasets/state_soil_summary.csv")
     State = "Delhi"
     sample = None
     Deficiency = []
     detect_deficiency(Deficiency)
     fertilizer_recommendation(Deficiency)
-
-
