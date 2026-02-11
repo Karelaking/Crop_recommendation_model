@@ -53,7 +53,8 @@ def generalized_fertilizers(deficiency):
 
     if OC in LOW:
         if low_count == 2:
-            fertilizer.append("organic matter + npk_complex")
+            fertilizer.append("organic matter")
+            fertilizer.append("npk_complex")
         else:
             fertilizer.append("organic matter")
 
@@ -78,17 +79,17 @@ def generalized_fertilizers(deficiency):
     else:
         fertilizer.append("No recommendation")
 
-    print(fertilizer)
+    return fertilizer
 
 
 def generalized_micronutrients(deficiency):
     micro_map = {
-        "4": "zinc_sulphate",
+        "4": "zinc sulphate",
         "5": "borax",
-        "6": "ferrous_sulphate",
-        "7": "manganese_sulphate",
-        "8": "copper_sulphate",
-        "9": "sulphur_bentonite"
+        "6": "ferrous sulphate",
+        "7": "manganese sulphate",
+        "8": "copper sulphate",
+        "9": "sulphur bentonite"
     }
 
     micronutrients = []
@@ -98,15 +99,34 @@ def generalized_micronutrients(deficiency):
             micronutrients.append(micro_map[str(i)])
 
     if micronutrients:
-        print(micronutrients)
+        return micronutrients
     else:
         micronutrients.append("no_micronutrient_needed")
-        print(micronutrients)
+        return micronutrients
+
+
+def result(fertilizer, micronutrients):
+    dosage = []
+
+    for fert in fertilizer:
+        if fert in dr["fertilizers"].values:
+            value = dr.loc[dr["fertilizers"] == fert, "Dosage"].iloc[0]
+            dosage.append({fert: value})
+
+    for micro in micronutrients:
+        if micro in dr["fertilizers"].values:
+            value = dr.loc[dr["fertilizers"] == micro, "Dosage"].iloc[0]
+            dosage.append({micro: value})
+
+    return dosage
+
 
 if __name__ == "__main__":
     df = read_csv("../csv datasets/state_soil_summary.csv")
-    State = "Delhi"
+    dr = read_csv("../csv datasets/dosage_recommendation.csv")
+    State = "Tamil Nadu"
     sample = None
-    Deficiency = []
-    detect_deficiency(Deficiency)
-    fertilizer_recommendation(Deficiency)
+
+    Deficiency = detect_deficiency([])
+    fertilizer, micronutrients = fertilizer_recommendation(Deficiency)
+    dosage = result(fertilizer, micronutrients)
