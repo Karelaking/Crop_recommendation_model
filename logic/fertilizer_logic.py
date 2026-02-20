@@ -9,7 +9,7 @@ def detect_deficiency(deficiency):
 
     return deficiency
 
-def fertilizer_recommendation(deficiency):
+def fertilizer_recommendation(deficiency)
     if sample is None:
         return generalized_fertilizers(deficiency), generalized_micronutrients(deficiency)
     else:
